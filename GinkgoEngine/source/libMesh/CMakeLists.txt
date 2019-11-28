@@ -35,7 +35,11 @@ set(LIB
   libMath
 )
 
-# Disabled for makesdna/makesrna.
-add_definitions(-DWITH_CLOG_PTHREADS)
+add_library(libMesh ${SRC})
 
-GE_lib__impl(libMesh "${SRC}" "${INC}" "${INC_SYS}" "${LIB}")
+target_link_libraries(libMesh PUBLIC ${LIB})
+
+target_include_directories(libMesh PUBLIC
+                           "${PROJECT_BINARY_DIR}"
+                           "${INC}"
+                           "${INC_SYS}")

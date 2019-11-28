@@ -1,7 +1,4 @@
-
-#ifndef QUATERNION_H
-#define QUATERNION_H
-
+#pragma once
 
 namespace External
 {
@@ -74,10 +71,8 @@ namespace External
 		static Vector4  QuaternionToEuler(const Quaternion& q);
 
 
-
 	};
 
-
 }
-#endif // !QUATERNION_H
+
 

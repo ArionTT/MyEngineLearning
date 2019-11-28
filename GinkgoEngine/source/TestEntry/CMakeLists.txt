@@ -16,34 +16,38 @@
 #
 # ***** END GPL LICENSE BLOCK *****
 
-set(INC
-  .
-  ../libMath
-  ../libRay
-  ../libImage
+set(GE_INC
+  ${GE_SOURCE_PATH}
+  ${GE_SOURCE_PATH}/libMath
+  ${GE_SOURCE_PATH}/libRay
+  ${GE_SOURCE_PATH}/libImage
 )
 
 set(INC_SYS
-
+# ${GE_SYSTEM_PATH}
 )
 
-set(SRC
+set(GE_SRC
   main.cpp
 )
 
-set(LIB
+set(GE_LIB
   libMath
   libRay
   libImage
 )
 
-# Disabled for makesdna/makesrna.
-add_definitions(-DWITH_CLOG_PTHREADS)
+add_executable(TestEntry ${GE_SRC})
 
-GE_include_dirs(INC)
-GE_include_dirs_sys(INC)
+target_link_libraries(TestEntry PUBLIC ${GE_LIB})
 
-# GE_lib__impl(libMesh "${SRC}" "${INC}" "${INC_SYS}" "${LIB}")
-add_executable(TestEntry ${SRC})
+target_include_directories(TestEntry PUBLIC
+                           "${PROJECT_BINARY_DIR}"
+                           "${GE_INC}"
+                           )
 
-target_link_libraries(TestEntry ${LIB})
+# 设置INSTALL操作的目标文件夹和目标文件移动
+install(TARGETS TestEntry DESTINATION bin)
+# install(FILES "${PROJECT_BINARY_DIR}/GinkgoEngineConfig.h"
+#         DESTINATION include)
+

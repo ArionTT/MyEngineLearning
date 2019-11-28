@@ -1,6 +1,8 @@
+#include "Config.h"
+
 #pragma once
 
-#include "Config.h"
+
 
 namespace External
 {

@@ -1,32 +1,13 @@
-# ***** BEGIN GPL LICENSE BLOCK *****
-#
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-#
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-#
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software Foundation,
-# Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
-#
-# ***** END GPL LICENSE BLOCK *****
 
-set(INC
-  .
-#  ../atomic
-#  ../guardedalloc
+set(GE_INC
+${GE_SOURCE_PATH}/libMath
 )
 
-set(INC_SYS
-
+set(I_SYS
+${GE_SYSTEM_PATH}
 )
 
-set(SRC
+set(GE_SRC
   Color.cpp
   Color.h
   Config.h
@@ -44,11 +25,33 @@ set(SRC
   String.h
 )
 
-set(LIB
+set(GE_LIB
 
 )
 
-# Disabled for makesdna/makesrna.
-# add_definitions(-DWITH_CLOG_PTHREADS)
+add_library(libMath ${GE_SRC})
 
-GE_lib__impl(libMath "${SRC}" "${INC}" "${INC_SYS}" "${LIB}")
+# target_link_libraries(libMath PUBLIC ${GE_LIB})
+
+target_include_directories(libMath PUBLIC
+                           "${PROJECT_BINARY_DIR}"
+                          #  "${GE_INC}"
+                           )
+
+set(GE_SRC_INC
+${GE_SOURCE_PATH}/libMath/Color.h
+${GE_SOURCE_PATH}/libMath/Config.h
+${GE_SOURCE_PATH}/libMath/Curve.h
+${GE_SOURCE_PATH}/libMath/Math.h
+${GE_SOURCE_PATH}/libMath/Matrix4x4.h
+${GE_SOURCE_PATH}/libMath/Quaternion.h
+${GE_SOURCE_PATH}/libMath/stdhead.h
+${GE_SOURCE_PATH}/libMath/Vector.h
+${GE_SOURCE_PATH}/libMath/String.h
+)
+
+# 设置INSTALL操作的目标文件夹和目标文件移动
+install(TARGETS libMath DESTINATION lib)
+install(FILES ${GE_SRC_INC}
+        DESTINATION include/libMath)
+

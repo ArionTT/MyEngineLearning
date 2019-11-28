@@ -16,16 +16,16 @@
 #
 # ***** END GPL LICENSE BLOCK *****
 
-set(INC
-  .
-  ../libMath
+set(GE_INC
+${GE_SOURCE_PATH}/
+${GE_SOURCE_PATH}/libMath/
 )
 
 set(INC_SYS
-
+# ${GE_SYSTEM_PATH}
 )
 
-set(SRC
+set(GE_SRC
   libImage.cpp
   libImage.h
   stb/stb_image.cpp
@@ -34,11 +34,27 @@ set(SRC
   stb/stb_image_resize.h
 )
 
-set(LIB
+set(GE_LIB
   libMath
 )
 
-# Disabled for makesdna/makesrna.
-# add_definitions(-DWITH_CLOG_PTHREADS)
+add_library(libImage ${GE_SRC})
 
-GE_lib__impl(libImage "${SRC}" "${INC}" "${INC_SYS}" "${LIB}")
+target_link_libraries(libImage PUBLIC ${GE_LIB})
+
+target_include_directories(libImage PUBLIC
+                           "${PROJECT_BINARY_DIR}"
+                           "${GE_INC}"
+                           )
+
+set(GE_SRC_INC
+${GE_SOURCE_PATH}/libImage/libImage.h
+${GE_SOURCE_PATH}/libImage/stb/stb_image.h
+${GE_SOURCE_PATH}/libImage/stb/stb_image_write.h
+${GE_SOURCE_PATH}/libImage/stb/stb_image_resize.h
+)
+
+# 设置INSTALL操作的目标文件夹和目标文件移动
+install(TARGETS libImage DESTINATION lib)
+install(FILES ${GE_SRC_INC}
+        DESTINATION include/libImage)

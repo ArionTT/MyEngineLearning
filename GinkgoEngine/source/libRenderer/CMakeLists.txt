@@ -34,7 +34,11 @@ set(SRC
 set(LIB
 )
 
-# Disabled for makesdna/makesrna.
-add_definitions(-DWITH_CLOG_PTHREADS)
+add_library(libRenderer ${SRC})
 
-GE_lib__impl(libRenderer "${SRC}" "${INC}" "${INC_SYS}" "${LIB}")
+target_link_libraries(libRenderer PUBLIC ${LIB})
+
+target_include_directories(libRenderer PUBLIC
+                           "${PROJECT_BINARY_DIR}"
+                           "${INC}"
+                           "${INC_SYS}")

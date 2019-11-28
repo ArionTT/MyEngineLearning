@@ -1,6 +1,4 @@
-#ifndef MATRIX4X4_H
-#define MATRIX4X4_H
-
+#pragma once
 
 namespace External
 {
@@ -71,4 +69,3 @@ namespace External
 
 }
 
-#endif // !MATRIX4X4_H

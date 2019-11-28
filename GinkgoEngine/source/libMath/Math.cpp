@@ -4,14 +4,13 @@
 
 #include "Math.h"
 
-//#include <cmath>
-#include<iostream>
-#include<math.h>
-#include<string>
+//#include<iostream>
+#include<cmath>
+//#include<string>
 
 namespace External
 {
-	std::string aaa = "123";
+	//std::string aaa = "123";
 
 	const float PI_2__INV__360_DEGREE = PI_2 / 360.0f;
 
@@ -56,7 +55,7 @@ namespace External
 
 	float sin(float value)
 	{
-		return sinf(value);
+		return ::sinf(value);
 	}
 
 	float cos(float value)

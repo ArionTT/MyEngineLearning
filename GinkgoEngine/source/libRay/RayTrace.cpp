@@ -7,11 +7,9 @@
 
 namespace External
 {
-	Vector3 bg_color = Vector3(0.125f, 0.4532f, 0.758f);// vec3(0.85f, 0.45f, 0.12f);
-	Vector3 bad_color = Vector3(0.9f, 0.0f, 0.9f);
-
+	Vector3 RayTracer::bg_color = Vector3(0.125f, 0.4532f, 0.758f);// vec3(0.85f, 0.45f, 0.12f);
+	Vector3 RayTracer::bad_color = Vector3(0.9f, 0.0f, 0.9f);
 	int RayTracer::depth_max = 200;
-
 
 	Ray RayTracer::generateRay(const RayCamera & _camera, float _u, float _v)
 	{
